@@ -27,7 +27,12 @@
 			const picture = document.getElementById("HeavyResistanceTile");
 
 			// 4. Hide the picture if the XML value is "false"
-			picture.classList.toggle("hidden", showImageValue === "false");
+			if (showImageValue !== "true") {
+			    picture.classList.add("hidden");
+			} else {
+			    picture.classList.remove("hidden");
+			}
+
 		})
 		.catch(error => console.error('Error loading XML:', error));
 	</script>
