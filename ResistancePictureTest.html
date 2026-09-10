@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* This class will hide the picture */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- The image you want to hide or show -->
+    <img id="HeavyResistanceTile" src="Heavy.jpg" title="Heavy Resistance Area">
+
+	<script>
+	// 1. Fetch and parse the XML file
+	fetch("config.xml")
+		.then(response => response.text())
+		.then(data => {
+			const parser = new DOMParser();
+			const xmlDoc = parser.parseFromString(data, "text/xml");
+
+			// 2. Get the specific value from the XML
+			const showImageValue = xmlDoc.getElementsByTagName("showImage")[0].textContent;
+
+			// 3. Find the HTML image element
+			const picture = document.getElementById("myPicture");
+
+			// 4. Hide the picture if the XML value is "false"
+			if (showImageValue === "false") {
+				picture.classList.add("hidden");
+			}
+		})
+		.catch(error => console.error('Error loading XML:', error));
+	</script>
+	
+</body>
+</html>
