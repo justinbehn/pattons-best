@@ -17,6 +17,8 @@
 	fetch("config.xml")
 		.then(response => response.text())
 		.then(data => {
+			console.log("XML value:", showImageValue);
+			
 			const parser = new DOMParser();
 			const xmlDoc = parser.parseFromString(data, "text/xml");
 
