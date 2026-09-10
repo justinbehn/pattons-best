@@ -24,10 +24,10 @@
 			const showImageValue = xmlDoc.getElementsByTagName("showImage")[0].textContent;
 
 			// 3. Find the HTML image element
-			const picture = document.getElementById("myPicture");
+			const picture = document.getElementById("HeavyResistanceTile");
 
 			// 4. Hide the picture if the XML value is "false"
-			if (showImage.Value === "false") {
+			if (showImageValue === "false") {
 				picture.classList.add("hidden");
 			}
 		})
