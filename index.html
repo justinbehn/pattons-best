@@ -12,32 +12,26 @@
     <!-- The image you want to hide or show -->
     <img id="HeavyResistanceTile" src="Heavy.jpg" title="Heavy Resistance Area">
 
-	<script>
-	// 1. Fetch and parse the XML file
-	fetch("config.xml")
-		.then(response => response.text())
-		.then(data => {
-			console.log("XML value:", showImageValue);
-			
-			const parser = new DOMParser();
-			const xmlDoc = parser.parseFromString(data, "text/xml");
+<script>
+fetch("config.xml?nocache=" + Date.now())
+    .then(response => response.text())
+    .then(data => {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, "text/xml");
+        const showImageValue = xmlDoc.getElementsByTagName("showImage")[0].textContent.trim().toLowerCase();
+        const picture = document.getElementById("HeavyResistanceTile");
 
-			// 2. Get the specific value from the XML
-			const showImageValue = xmlDoc.getElementsByTagName("showImage")[0].textContent;
+        console.log("XML value:", showImageValue);
 
-			// 3. Find the HTML image element
-			const picture = document.getElementById("HeavyResistanceTile");
+        if (showImageValue === "true") {
+            picture.classList.remove("hidden");
+        } else {
+            picture.classList.add("hidden");
+        }
+    })
+    .catch(error => console.error("Error loading XML:", error));
+</script>
 
-			// 4. Hide the picture if the XML value is "false"
-			if (showImageValue !== "true") {
-			    picture.classList.add("hidden");
-			} else {
-			    picture.classList.remove("hidden");
-			}
-
-		})
-		.catch(error => console.error('Error loading XML:', error));
-	</script>
 	
 
 </body>
